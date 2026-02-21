@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Cifrador de Mensajes v1.0</h2>
+
+  <div class="config-panel">
+    <label>Conjunto de Caracteres (Alfabeto):</label>
+    <input type="text" [(ngModel)]="alphabet" placeholder="Ej: ABC...xyz">
+
+    <div class="row">
+      <div class="col">
+        <label>Método:</label>
+        <select [(ngModel)]="method">
+          <option value="cesar">César</option>
+          <option value="atbash">Atbash</option>
+        </select>
+      </div>
+
+      @if (method === 'cesar') {
+      <div class="col">
+        <label>Módulo (Desplazamiento):</label>
+        <input type="number" [(ngModel)]="displacement">
+      </div>
+      }
+    </div>
+  </div>
+
+  <textarea [(ngModel)]="initialText" placeholder="Escribe tu mensaje aquí..."></textarea>
+
+  <div class="actions">
+    <button (click)="fn03('cifrar')" class="btn-primary">Cifrar</button>
+    <button (click)="fn03('descifrar')" class="btn-secondary">Descifrar</button>
+  </div>
+
+  @if (resultText) {
+  <div class="result-box">
+    <strong>Resultado:</strong>
+    <p>{{ resultText }}</p>
+  </div>
+  }
+</div>
