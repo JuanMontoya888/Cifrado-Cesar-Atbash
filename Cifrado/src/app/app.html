@@ -2,6 +2,22 @@
 
   <h2>Message Encryptor v2.0</h2>
 
+  <div class="config-panel ai-config">
+    <label style="color: #64ffda;">Gemini AI Configuration:</label>
+    <div class="row">
+      <div class="col" style="flex: 1;">
+        <input 
+          type="password" 
+          [(ngModel)]="geminiApiKey" 
+          placeholder="Paste your Gemini API Key here..."
+          class="api-input">
+      </div>
+    </div>
+    <small style="color: #888; font-size: 0.8em; margin-top: 5px; display: block;">
+      * Your key is only used locally and is not stored on any server.
+    </small>
+  </div>
+
   <div class="config-panel">
     <label>Character Set (Alphabet):</label>
     <input type="text" [(ngModel)]="alphabet" placeholder="e.g.: ABC...xyz">
@@ -34,6 +50,7 @@
   <div class="result-box">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
       <strong>Encryption/Decryption Results:</strong>
+
       @if (resultText.length > 1) {
       <button (click)="analizarResultadosConIA()" class="btn-ia" title="Let the AI find the correct message">
         Find with AI
@@ -41,7 +58,7 @@
       }
     </div>
 
-    <p>Sorted by Frequency Table of Spanish</p>
+    <p style="font-size: 0.9em; color: #aaa;">Sorted by Frequency Table of Spanish</p>
 
     @if (resultText.length === 0 && resultadosProbables.length === 0) {
     <p class="empty-state">The result will appear here...</p>
