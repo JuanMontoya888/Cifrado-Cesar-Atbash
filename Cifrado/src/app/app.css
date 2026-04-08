@@ -1,5 +1,5 @@
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 40px auto;
   font-family: sans-serif;
   padding: 20px;
@@ -7,12 +7,14 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .config-panel {
   background: #f9f9f9;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
 }
+
 input,
 select,
 textarea {
@@ -22,19 +24,28 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-family: inherit;
 }
+
 textarea {
   height: 100px;
   resize: vertical;
 }
+
 .row {
   display: flex;
   gap: 15px;
 }
+
+.col {
+  flex: 1;
+}
+
 .actions {
   display: flex;
   gap: 10px;
 }
+
 button {
   flex: 1;
   padding: 12px;
@@ -42,19 +53,227 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  transition: opacity 0.2s;
 }
+
+button:hover {
+  opacity: 0.9;
+}
+
 .btn-primary {
   background: #2c3e50;
   color: white;
 }
+
 .btn-secondary {
   background: #34495e;
   color: white;
 }
-.result-box {
+
+/* --- ESTILOS DE LA CAJA DE RESULTADOS --- */
+.result-box, .analysis-box {
   margin-top: 20px;
-  padding: 15px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.result-box {
+  background: #f8f9fa;
+  border-left: 5px solid #3498db;
+}
+
+.empty-state {
+  color: #7f8c8d;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.resultado-lista {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+  max-height: 350px; /* Limita la altura */
+  overflow-y: auto; /* Añade scroll si hay muchos resultados */
+}
+
+.resultado-item {
+  background: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  color: #fff;
+  background-color: #3498db;
+  padding: 3px 8px;
+  border-radius: 12px;
+  align-self: flex-start;
+  font-weight: bold;
+}
+
+.texto {
+  font-family: monospace; /* Tipografía ideal para ver cifrados */
+  font-size: 1.1rem;
+  color: #2c3e50;
+  word-break: break-all;
+}
+
+/* --- ESTILOS DE LA SECCIÓN DE ANÁLISIS --- */
+.analysis-box {
+  background: #fdfefe;
+  border-left: 5px solid #e67e22;
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin: 5px 0 15px 0;
+}
+
+.table-container {
+  max-height: 200px; /* Scroll para la tabla si hay muchas letras */
+  overflow-y: auto;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.freq-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.freq-table th, .freq-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.freq-table th {
+  background-color: #f4f6f7;
+  color: #2c3e50;
+  font-weight: bold;
+  position: sticky; /* Deja los títulos fijos al hacer scroll */
+  top: 0;
+}
+
+.freq-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.char-cell {
+  font-family: monospace;
+  font-weight: bold;
+  color: #e67e22;
+  font-size: 1.1rem;
+}
+
+/* --- ESTILOS NUEVOS PARA EL ITEM Y BOTÓN DE COPIAR --- */
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 8px;
+}
+
+/* Modificamos la etiqueta button base para que no rompa el diseño del botón pequeño */
+button {
+  flex: none; /* Quitamos el flex: 1 global */
+}
+
+/* Devolvemos el flex: 1 a los botones principales */
+.btn-primary, .btn-secondary {
+  flex: 1; 
+}
+
+.btn-copy {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #555;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-copy:hover {
   background: #e8f6f3;
-  border-left: 5px solid #1abc9c;
-  word-wrap: break-word;
+  color: #1abc9c;
+  border-color: #1abc9c;
+}
+
+/* --- ESTILOS DEL BOTÓN DE IA --- */
+.ia-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.btn-ia {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex: none; /* Evita que crezca a todo el ancho */
+}
+
+.btn-ia:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+  opacity: 1;
+}
+/* --- ESTILOS DE RESULTADOS SUGERIDOS --- */
+.success-banner {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background-color: #eafaf1;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #2ecc71;
+}
+
+.success-title {
+  color: #27ae60;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.probable-lista {
+  max-height: none; /* Que se vea completo sin scroll */
+  margin: 0;
+}
+
+.success-item {
+  border-color: #2ecc71;
+  box-shadow: 0 2px 4px rgba(46, 204, 113, 0.15);
+}
+
+.badge-success {
+  background-color: #27ae60;
+}
+
+.subtitle-text {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

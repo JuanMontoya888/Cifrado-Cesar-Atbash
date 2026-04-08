@@ -1,39 +1,87 @@
 <div class="container">
-  <h2>Cifrador de Mensajes v1.0</h2>
+
+  <h2>Message Encryptor v2.0</h2>
 
   <div class="config-panel">
-    <label>Conjunto de Caracteres (Alfabeto):</label>
-    <input type="text" [(ngModel)]="alphabet" placeholder="Ej: ABC...xyz">
+    <label>Character Set (Alphabet):</label>
+    <input type="text" [(ngModel)]="alphabet" placeholder="e.g.: ABC...xyz">
 
     <div class="row">
       <div class="col">
-        <label>Método:</label>
+        <label>Method:</label>
         <select [(ngModel)]="method">
-          <option value="cesar">César</option>
+          <option value="cesar">Cesar</option>
           <option value="atbash">Atbash</option>
         </select>
       </div>
 
       @if (method === 'cesar') {
       <div class="col">
-        <label>Módulo (Desplazamiento):</label>
+        <label>Shift (Displacement):</label>
         <input type="number" [(ngModel)]="displacement">
       </div>
       }
     </div>
   </div>
 
-  <textarea [(ngModel)]="initialText" placeholder="Escribe tu mensaje aquí..."></textarea>
+  <textarea [(ngModel)]="initialText" placeholder="Write your message here..."></textarea>
 
   <div class="actions">
-    <button (click)="fn03('cifrar')" class="btn-primary">Cifrar</button>
-    <button (click)="fn03('descifrar')" class="btn-secondary">Descifrar</button>
+    <button (click)="procesarMensaje('cifrar')" class="btn-primary">Encrypt</button>
+    <button (click)="procesarMensaje('descifrar')" class="btn-secondary">Decrypt</button>
   </div>
 
-  @if (resultText) {
   <div class="result-box">
-    <strong>Resultado:</strong>
-    <p>{{ resultText }}</p>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <strong>Encryption/Decryption Results:</strong>
+      @if (resultText.length > 1) {
+      <button (click)="analizarResultadosConIA()" class="btn-ia" title="Let the AI find the correct message">
+        Find with AI
+      </button>
+      }
+    </div>
+
+    <p>Sorted by Frequency Table of Spanish</p>
+
+    @if (resultText.length === 0 && resultadosProbables.length === 0) {
+    <p class="empty-state">The result will appear here...</p>
+    }
+
+    @if (resultadosProbables.length > 0) {
+    <div class="success-banner">
+      <p class="success-title"> Message detected by Gemini!</p>
+      <ul class="resultado-lista probable-lista">
+        @for(res of resultadosProbables; track $index) {
+        <li class="resultado-item success-item">
+          <div class="item-header">
+            <span class="badge badge-success">Solution</span>
+            <button class="btn-copy" (click)="copiarTexto(res)" title="Copy text">Copy</button>
+          </div>
+          <span class="texto">{{ res }}</span>
+        </li>
+        }
+      </ul>
+    </div>
+    <p class="subtitle-text">Remaining discarded options:</p>
+    }
+
+    @if (resultText.length > 0) {
+    <ul class="resultado-lista">
+      @for(res of resultText; track $index) {
+      <li class="resultado-item">
+        <div class="item-header">
+          @if(method === 'cesar' && resultText.length > 1) {
+          <span class="badge">Sorted Option</span>
+          } @else {
+          <span></span>
+          }
+          <button class="btn-copy" (click)="copiarTexto(res)" title="Copy text">Copy</button>
+        </div>
+        <span class="texto">{{ res }}</span>
+      </li>
+      }
+    </ul>
+    }
   </div>
-  }
+
 </div>
