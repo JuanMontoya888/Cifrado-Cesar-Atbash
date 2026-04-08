@@ -33,7 +33,7 @@ export class App {
   displacement: number = 3;
 
   // Sensitive data: Gemini API Key (Security Note: Ideally managed via environment variables)
-  private geminiApiKey: string = "AIzaSyBjnge-SnXD0D9khzETabLK8Co4ZVLYhLc";
+  private geminiApiKey: string = "";
 
   // Language Heuristics: Frequency of letters in Spanish for statistical sorting
   private frecuenciasEspanol: { [key: string]: number } = {
