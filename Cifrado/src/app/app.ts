@@ -41,7 +41,6 @@ export class App {
   method: 'cesar' | 'atbash' = 'cesar';
   alphabet: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   displacement: number = 3;
-
   geminiApiKey: string = "";
 
   /** Statistical distribution of letters in Spanish for frequency analysis */
